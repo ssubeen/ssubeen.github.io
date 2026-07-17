@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Song Subeen</title>
+  <meta name="description" content="Song Subeen — Senior Associate at Boston Consulting Group. Strategy, M&amp;A, and value creation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f8f7;
+      --border: #e6e8e6;
+      --ink: #14231b;
+      --muted: #5c6b62;
+      --accent: #177b57;
+      --accent-soft: #e7f2ec;
+      --max: 860px;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Inter", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Language visibility */
+    .ko { display: none; }
+    body.lang-ko .en { display: none; }
+    body.lang-ko .ko { display: initial; }
+    body.lang-ko { font-family: "Noto Sans KR", "Inter", sans-serif; }
+
+    /* Top bar */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 22px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: saturate(180%) blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar .brand { font-weight: 700; letter-spacing: -0.01em; }
+    .nav { display: flex; gap: 18px; align-items: center; }
+    .nav a { color: var(--muted); font-size: 14px; font-weight: 500; }
+    .nav a:hover { color: var(--ink); text-decoration: none; }
+    .lang-toggle {
+      display: inline-flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden;
+      font-size: 13px; font-weight: 600;
+    }
+    .lang-toggle button {
+      border: 0; background: transparent; color: var(--muted);
+      padding: 6px 12px; cursor: pointer; font: inherit;
+    }
+    .lang-toggle button.active { background: var(--accent); color: #fff; }
+    @media (max-width: 620px) { .nav a.section-link { display: none; } }
+
+    /* Layout */
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+
+    /* Hero */
+    header.hero { padding: 68px 0 40px; }
+    .hero .eyebrow { color: var(--accent); font-weight: 600; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px; }
+    .hero h1 { font-size: clamp(34px, 6vw, 52px); line-height: 1.08; letter-spacing: -0.02em; margin: 0 0 14px; font-weight: 800; }
+    .hero .role { font-size: clamp(17px, 2.4vw, 20px); color: var(--ink); font-weight: 600; margin: 0 0 6px; }
+    .hero .meta { color: var(--muted); font-size: 15px; margin-bottom: 22px; }
+    .hero p.bio { font-size: 17px; color: var(--muted); max-width: 640px; margin: 0 0 26px; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 9px 16px; border-radius: 999px; font-weight: 600; font-size: 14px;
+      border: 1px solid var(--border); color: var(--ink); background: #fff;
+    }
+    .btn:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn.primary:hover { background: #12664a; color: #fff; }
+
+    /* Sections */
+    section { padding: 34px 0; border-top: 1px solid var(--border); }
+    section h2 {
+      font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); font-weight: 700; margin: 0 0 22px;
+    }
+
+    /* Experience entry */
+    .entry { margin-bottom: 30px; }
+    .entry:last-child { margin-bottom: 0; }
+    .entry .entry-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; align-items: baseline; }
+    .entry .org { font-size: 19px; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
+    .entry .when { color: var(--muted); font-size: 14px; white-space: nowrap; }
+    .entry .titleline { color: var(--ink); font-weight: 500; margin: 2px 0 4px; }
+    .entry .place { color: var(--muted); font-size: 14px; margin: 0 0 6px; }
+
+    .cluster { margin-top: 18px; }
+    .cluster h3 { font-size: 16px; font-weight: 700; margin: 0 0 4px; color: var(--ink); }
+    .cluster .lead { color: var(--muted); font-size: 14.5px; margin: 0 0 10px; font-style: italic; }
+    ul.bullets { margin: 0; padding-left: 20px; }
+    ul.bullets li { margin-bottom: 8px; color: #2c3b33; }
+    ul.bullets li::marker { color: var(--accent); }
+
+    /* Education / two-col rows */
+    .row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; align-items: baseline; }
+    .honors { color: var(--muted); font-size: 14.5px; margin-top: 8px; }
+
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .skill-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
+    .skill-card .k { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); font-weight: 700; margin-bottom: 6px; }
+    .skill-card .v { color: var(--ink); }
+
+    footer { padding: 40px 0 60px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; }
+    footer .links { margin-top: 14px; }
+  </style>
+</head>
+<body class="lang-en">
+  <div class="topbar">
+    <span class="brand">Song Subeen</span>
+    <nav class="nav">
+      <a class="section-link" href="#experience"><span class="en">Experience</span><span class="ko">경력</span></a>
+      <a class="section-link" href="#education"><span class="en">Education</span><span class="ko">학력</span></a>
+      <a class="section-link" href="#skills"><span class="en">Skills</span><span class="ko">스킬</span></a>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button id="btn-en" class="active" type="button" onclick="setLang('en')">EN</button>
+        <button id="btn-ko" type="button" onclick="setLang('ko')">KO</button>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <div class="eyebrow"><span class="en">Boston Consulting Group · Seoul</span><span class="ko">보스턴컨설팅그룹 · 서울</span></div>
+      <h1>Song Subeen</h1>
+      <p class="role"><span class="en">Senior Associate, Boston Consulting Group</span><span class="ko">시니어 어소시에이트, 보스턴컨설팅그룹</span></p>
+      <p class="meta"><span class="en">Seoul, Korea · Mar 2022 – Present</span><span class="ko">대한민국 서울 · 2022년 3월 – 현재</span></p>
+      <p class="bio">
+        <span class="en">I advise corporates and financial sponsors on portfolio strategy, M&amp;A, new business development, and value creation. KAIST graduate in Bio &amp; Brain Engineering and Business &amp; Technology Management.</span>
+        <span class="ko">기업과 재무적 투자자를 대상으로 포트폴리오 전략, M&amp;A, 신사업 개발, 가치 창출을 자문합니다. KAIST에서 뇌인지공학과 기술경영학을 전공했습니다.</span>
+      </p>
+      <div class="links">
+        <a class="btn primary" href="https://github.com/ssubeen" target="_blank" rel="noopener">GitHub</a>
+        <!-- LinkedIn 링크를 추가하려면 아래 주석을 해제하고 URL을 넣으세요.
+        <a class="btn" href="https://www.linkedin.com/in/YOUR-ID" target="_blank" rel="noopener">LinkedIn</a>
+        -->
+      </div>
+    </header>
+
+    <section id="experience">
+      <h2><span class="en">Work Experience</span><span class="ko">경력</span></h2>
+
+      <div class="entry">
+        <div class="entry-head">
+          <p class="org">Boston Consulting Group</p>
+          <span class="when"><span class="en">Mar 2022 – Present</span><span class="ko">2022년 3월 – 현재</span></span>
+        </div>
+        <p class="titleline"><span class="en">Senior Associate</span><span class="ko">시니어 어소시에이트</span></p>
+        <p class="place"><span class="en">Seoul, Korea</span><span class="ko">대한민국 서울</span></p>
+
+        <div class="cluster">
+          <h3><span class="en">Portfolio Repositioning &amp; Strategic Investment Evaluation</span><span class="ko">포트폴리오 재편 &amp; 전략적 투자 평가</span></h3>
+          <p class="lead">
+            <span class="en">Advised corporates and financial sponsors on portfolio realignment and investment decisions in alignment with strategic vision and evolving market dynamics</span>
+            <span class="ko">전략적 비전과 변화하는 시장 상황에 맞춰 기업 및 재무적 투자자의 포트폴리오 재정렬과 투자 의사결정을 자문</span>
+          </p>
+          <ul class="bullets">
+            <li><span class="en">Repositioned an enterprise AI portfolio for a major telecom group and defined future business direction with key execution enablers</span><span class="ko">대형 통신 그룹의 기업용 AI 포트폴리오를 재편하고, 핵심 실행 요건과 함께 향후 사업 방향을 정의</span></li>
+            <li><span class="en">Evaluated synergies and financial upside of a multibillion-dollar HVAC acquisition and developed an investment package to support external fund-raising</span><span class="ko">수십억 달러 규모의 HVAC 인수 시너지와 재무적 업사이드를 평가하고, 외부 자금 조달을 위한 투자 패키지를 개발</span></li>
+            <li><span class="en">Conducted a comprehensive assessment of legal, operational, and financial risks related to a business unit divestiture, and proposed mitigation strategies through a carve-out readiness review</span><span class="ko">사업부 매각과 관련한 법률·운영·재무 리스크를 종합 평가하고, 카브아웃 준비도 검토를 통해 완화 전략을 제안</span></li>
+          </ul>
+        </div>
+
+        <div class="cluster">
+          <h3><span class="en">New Business Development &amp; Investment Decision</span><span class="ko">신사업 개발 &amp; 투자 의사결정</span></h3>
+          <p class="lead">
+            <span class="en">Identified and structured new business opportunities and go-to-market strategies to support long-term growth</span>
+            <span class="ko">장기 성장을 뒷받침할 신규 사업 기회와 시장 진입 전략을 발굴하고 구조화</span>
+          </p>
+          <ul class="bullets">
+            <li><span class="en">Led M&amp;A for smart home market entry by identifying startup targets in North America and Europe, conducting commercial due diligence, and driving the deal through to acquisition</span><span class="ko">스마트홈 시장 진입을 위한 M&amp;A를 주도 — 북미·유럽 스타트업 타깃 발굴, 상업 실사 수행, 인수 완료까지 딜을 추진</span></li>
+            <li><span class="en">Developed a Japan growth strategy by prioritizing key chemical segments, identifying strategic partners, and outlining a go-to-market roadmap</span><span class="ko">핵심 화학 세그먼트 우선순위화, 전략적 파트너 발굴, 시장 진입 로드맵 수립을 통해 일본 성장 전략을 개발</span></li>
+            <li><span class="en">Assessed the attractiveness of eco-friendly construction materials by analyzing global trends and market potential for new business entry</span><span class="ko">글로벌 트렌드와 시장 잠재력 분석을 통해 친환경 건축 자재 신사업 진입의 매력도를 평가</span></li>
+            <li><span class="en">Developed a full potential plan for a PE-backed waste management firm by identifying growth opportunities and quantifying revenue upside</span><span class="ko">성장 기회 발굴과 매출 업사이드 정량화를 통해 PE 투자 폐기물 관리 기업의 풀 포텐셜 플랜을 수립</span></li>
+          </ul>
+        </div>
+
+        <div class="cluster">
+          <h3><span class="en">Organizational Enablement &amp; Execution Infrastructure</span><span class="ko">조직 역량 강화 &amp; 실행 인프라</span></h3>
+          <p class="lead">
+            <span class="en">Strengthened execution capabilities through organizational redesign, operations alignment, and funding strategy</span>
+            <span class="ko">조직 재설계, 운영 정렬, 자금 조달 전략을 통해 실행 역량을 강화</span>
+          </p>
+          <ul class="bullets">
+            <li><span class="en">Designed incentive structure and communication plan to enable talent retention during corporate spinout</span><span class="ko">기업 스핀아웃 과정에서 인재 유지를 위한 인센티브 구조와 커뮤니케이션 계획을 설계</span></li>
+            <li><span class="en">Re-aligned the customer portfolio strategy for a securities firm and developed an optimized structure for key client segments</span><span class="ko">증권사의 고객 포트폴리오 전략을 재정렬하고, 핵심 고객 세그먼트를 위한 최적 구조를 개발</span></li>
+            <li><span class="en">Defined CRM enhancement initiatives for an insurer and proposed execution-focused improvements</span><span class="ko">보험사의 CRM 고도화 이니셔티브를 정의하고 실행 중심의 개선안을 제안</span></li>
+            <li><span class="en">Secured U.S. plant funding by designing a public incentive strategy and leading grant application development for a battery materials manufacturer</span><span class="ko">배터리 소재 제조사의 미국 공장 자금 확보를 위해 공공 인센티브 전략을 설계하고 보조금 신청서 개발을 주도</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="other">
+      <h2><span class="en">Other Professional Experience</span><span class="ko">기타 경력</span></h2>
+
+      <div class="entry">
+        <div class="entry-head">
+          <p class="org">Ayijoa / 11L / Memore</p>
+          <span class="when">2019 – 2020</span>
+        </div>
+        <p class="titleline"><span class="en">Founding Member, Planning</span><span class="ko">창립 멤버, 기획</span></p>
+        <p class="place"><span class="en">Seoul, Korea</span><span class="ko">대한민국 서울</span></p>
+        <ul class="bullets">
+          <li><span class="en">Developed business plan and service model for the &lsquo;preliminary start-up support package&rsquo; (selected twice)</span><span class="ko">&lsquo;예비창업패키지&rsquo;를 위한 사업 계획과 서비스 모델을 개발 (2회 선정)</span></li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <p class="org">WAVE</p>
+          <span class="when"><span class="en">Dec 2020 – Feb 2021</span><span class="ko">2020년 12월 – 2021년 2월</span></span>
+        </div>
+        <p class="titleline"><span class="en">Intern, HR &amp; Operations Team &middot; Received full-time return offer</span><span class="ko">인턴, HR &amp; 운영팀 &middot; 정규직 리턴 오퍼 수령</span></p>
+        <p class="place"><span class="en">Seoul, Korea</span><span class="ko">대한민국 서울</span></p>
+        <ul class="bullets">
+          <li><span class="en">Developed and executed onboarding / offboarding / peer review / mingling processes</span><span class="ko">온보딩·오프보딩·동료 리뷰·밍글링 프로세스를 개발하고 실행</span></li>
+          <li><span class="en">Redesigned existing OJT and all-hands meetings</span><span class="ko">기존 OJT 미팅과 전사 미팅을 개편</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2><span class="en">Education</span><span class="ko">학력</span></h2>
+      <div class="entry">
+        <div class="entry-head">
+          <p class="org"><span class="en">KAIST (Korea Advanced Institute of Science and Technology)</span><span class="ko">KAIST (한국과학기술원)</span></p>
+          <span class="when"><span class="en">Mar 2017 – Feb 2022</span><span class="ko">2017년 3월 – 2022년 2월</span></span>
+        </div>
+        <p class="titleline"><span class="en">B.A. in Bio &amp; Brain Engineering / Business &amp; Technology Management</span><span class="ko">학사 — 뇌인지공학 / 기술경영학</span></p>
+        <p class="place"><span class="en">Daejeon, Korea</span><span class="ko">대한민국 대전</span></p>
+        <p class="honors">
+          <span class="en"><strong>Honors:</strong> 2018 Fall Dean&rsquo;s List · 2019 Spring departmental academic scholarship · 2nd prize, Group Leadership Activity (group leader)</span>
+          <span class="ko"><strong>수상:</strong> 2018년 가을학기 학장 우등생 명단 · 2019년 봄학기 학과 성적 장학금 · 그룹 리더십 활동 2위 (조장)</span>
+        </p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2><span class="en">Skills &amp; Other Information</span><span class="ko">스킬 &amp; 기타 정보</span></h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="k"><span class="en">Languages</span><span class="ko">언어</span></div>
+          <div class="v"><span class="en">Native Korean · Fluent in English</span><span class="ko">한국어 (원어민) · 영어 (능통)</span></div>
+        </div>
+        <div class="skill-card">
+          <div class="k"><span class="en">Computer</span><span class="ko">컴퓨터</span></div>
+          <div class="v"><span class="en">Proficient in Microsoft Office (Excel, Word, PowerPoint)</span><span class="ko">Microsoft Office 능숙 (Excel, Word, PowerPoint)</span></div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div><span class="en">&copy; <span id="year"></span> Song Subeen</span><span class="ko">&copy; <span class="year-ko"></span> 송수빈</span></div>
+      <div class="links">
+        <a class="btn" href="https://github.com/ssubeen" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    function setLang(lang) {
+      document.body.classList.toggle('lang-ko', lang === 'ko');
+      document.documentElement.lang = lang;
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+    (function () {
+      var saved;
+      try { saved = localStorage.getItem('lang'); } catch (e) {}
+      var initial = saved || (navigator.language && navigator.language.toLowerCase().indexOf('ko') === 0 ? 'ko' : 'en');
+      setLang(initial);
+      var y = new Date().getFullYear();
+      document.getElementById('year').textContent = y;
+      document.querySelector('.year-ko').textContent = y;
+    })();
+  </script>
+</body>
+</html>
